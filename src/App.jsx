@@ -20,6 +20,11 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import profileImg from './assets/profile.jpg';
+import pemiraImg from './assets/pemira.png';
+import donPabloImg from './assets/don_pablo.png';
+import secureQrImg from './assets/secure_qr.png';
+import maduraStoreImg from './assets/madura_store.png';
+import moodmealImg from './assets/moodmeal.png';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,14 +55,16 @@ const App = () => {
         name: "Don Pablo Flashsale Simulation",
         desc: "Pengembangan sistem simulasi transaksi cepat dengan manajemen konkurensi tinggi.",
         tag: "Performance",
-        link: "https://github.com/Alieff19/DonPablo_FlashSale_Simulation"
+        link: "https://github.com/Alieff19/DonPablo_FlashSale_Simulation",
+        image: donPabloImg
       },
       {
         id: 2,
         name: "Secure QR Vault",
         desc: "Sistem penyimpanan data terenkripsi yang diakses melalui otentikasi QR Code unik.",
         tag: "Security",
-        link: "https://github.com/Alieff19/SecureQR_Vault"
+        link: "https://github.com/Alieff19/SecureQR_Vault",
+        image: secureQrImg
       },
       {
         id: 3,
@@ -67,13 +74,15 @@ const App = () => {
         links: [
           { label: "Frontend", url: "https://github.com/amad-IO/frontendkasir-madura" },
           { label: "Backend", url: "https://github.com/azteca22che/BACKEND-FIKS" }
-        ]
+        ],
+        image: maduraStoreImg
       },
       {
         id: 4,
         name: "Pemira (E-Voting System)",
         desc: "Aplikasi pemungutan suara digital yang mengutamakan integritas dan transparansi data.",
-        tag: "Web App"
+        tag: "Web App",
+        image: pemiraImg
       },
       {
         id: 5,
@@ -272,27 +281,36 @@ const App = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {data.projects.map((p, idx) => (
-              <div key={p.id} className={`group relative p-10 rounded-[32px] bg-slate-900 border border-slate-800 overflow-hidden hover:border-red-500/50 transition-all shadow-xl hover:shadow-red-600/5 ${idx === 0 ? 'md:col-span-2' : ''}`}>
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                  <Briefcase size={120} />
+              <div key={p.id} className={`group relative rounded-[32px] bg-slate-900 border border-slate-800 overflow-hidden hover:border-red-500/50 transition-all shadow-xl hover:shadow-red-600/5 ${idx === 0 ? 'md:col-span-2' : ''}`}>
+
+                {/* Image Container */}
+                <div className="relative h-48 w-full overflow-hidden">
+                  <div className="absolute inset-0 bg-red-600/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
-                <div className="relative z-10">
-                  <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-widest mb-6">
+
+                <div className="relative z-10 p-8">
+                  <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                    <Briefcase size={80} />
+                  </div>
+
+                  <span className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-widest mb-4">
                     {p.tag}
                   </span>
-                  <h3 className="text-3xl font-bold mb-4 group-hover:text-red-400 transition-colors leading-tight">{p.name}</h3>
-                  <p className="text-slate-400 mb-8 text-lg leading-relaxed">{p.desc}</p>
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-red-400 transition-colors leading-tight">{p.name}</h3>
+                  <p className="text-slate-400 mb-6 text-base leading-relaxed">{p.desc}</p>
+
                   {p.links ? (
                     <div className="flex gap-4">
                       {p.links.map((link, i) => (
-                        <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-red-400 transition-all cursor-pointer">
-                          {link.label} <ExternalLink size={16} className="text-red-500" />
+                        <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-red-400 transition-all cursor-pointer bg-slate-800/50 hover:bg-slate-800 px-4 py-2 rounded-lg border border-slate-700/50">
+                          {link.label} <ExternalLink size={14} className="text-red-500" />
                         </a>
                       ))}
                     </div>
                   ) : (
-                    <a href={p.link || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-white group-hover:gap-3 transition-all cursor-pointer">
-                      Lihat Detail <ExternalLink size={16} className="text-red-500" />
+                    <a href={p.link || "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:gap-3 transition-all cursor-pointer bg-red-600 hover:bg-red-700 px-6 py-2.5 rounded-xl shadow-lg shadow-red-600/20">
+                      Lihat Detail <ExternalLink size={16} />
                     </a>
                   )}
                 </div>

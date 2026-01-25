@@ -1,0 +1,31 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Github, 
+  Instagram, 
+  Linkedin, 
+  Mail, 
+  ExternalLink, 
+  Code, 
+  Server, 
+  Shield, 
+  Cpu, 
+  Award, 
+  BookOpen, 
+  Briefcase, 
+  Users,
+  Menu,
+  X,
+  ChevronRight,
+  MapPin,
+  CheckCircle2
+} from 'lucide-react';
+import profileImg from './assets/profile.jpg';
+import pemiraImg from './assets/pemira.png';
+// Import generated images (make sure filenames match what was generated/renamed)
+// Since I can't know the exact filenames of generated images without listing, 
+// I will assume I need to rename them or allow the user to see generic imports first.
+// Wait, I know the filenames because I just generated them. 
+// However, the tool output gave them timestamps. I should find them first or just import them if I knew the names.
+// Better approach: I will list the directory first to get exact filenames before writing App.jsx.
+// Abort write, list dir first.
+const App = () => {};
