@@ -163,7 +163,7 @@ const App = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a href="https://drive.google.com/file/d/1NHXfBdi_EvwPIs7LucYqgGn0ZNFZNQ9L/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-red-600 hover:bg-red-700 rounded-xl font-bold transition-all shadow-lg shadow-red-600/20 flex items-center gap-2 text-white">
+              <a href="https://drive.google.com/file/d/1UP_YY5rqKGuhChqopxj8kxC_g6upKs6y/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-red-600 hover:bg-red-700 rounded-xl font-bold transition-all shadow-lg shadow-red-600/20 flex items-center gap-2 text-white">
                 Download CV <ExternalLink size={18} />
               </a>
               <div className="flex items-center gap-4 px-4 text-slate-400">
