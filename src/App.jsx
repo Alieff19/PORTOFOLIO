@@ -46,7 +46,7 @@ const App = () => {
     github: "https://github.com/Alieff19",
     location: "Surabaya, Indonesia",
     skills: {
-      hard: ["Network Administration", "Web Development", "Cybersecurity", "Modern Tools (Docker, Git)"],
+      hard: ["Network Administration", "Web Development", "Users/Mobile Development", "Cybersecurity", "Modern Tools (Docker, Git)"],
       soft: ["Leadership", "Public Relations", "Problem Solving", "Adaptability"]
     },
     projects: [
@@ -80,7 +80,7 @@ const App = () => {
       {
         id: 4,
         name: "Pemira (E-Voting System)",
-        desc: "Aplikasi pemungutan suara digital yang mengutamakan integritas dan transparansi data.",
+        desc: "Website pemungutan suara digital yang mengutamakan integritas dan transparansi data.",
         tag: "Web App",
         image: pemiraImg
       },
