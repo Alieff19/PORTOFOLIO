@@ -87,8 +87,9 @@ const App = () => {
       {
         id: 5,
         name: "Moodmeal",
-        desc: "Aplikasi cerdas rekomendasi menu kuliner berdasarkan analisis suasana hati pengguna.",
-        tag: "Innovation"
+        desc: "Website cerdas rekomendasi menu kuliner berdasarkan analisis suasana hati pengguna.",
+        tag: "Website",
+        image: moodmealImg
       }
     ],
     experience: [
