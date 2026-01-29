@@ -17,7 +17,9 @@ import {
   X,
   ChevronRight,
   MapPin,
-  CheckCircle2
+  MapPin,
+  CheckCircle2,
+  Maximize2
 } from 'lucide-react';
 import profileImg from './assets/profile.jpg';
 import pemiraImg from './assets/pemira.png';
@@ -26,9 +28,111 @@ import secureQrImg from './assets/secure_qr.png';
 import maduraStoreImg from './assets/madura_store.png';
 import moodmealImg from './assets/moodmeal.png';
 
+
+const ProjectModal = ({ project, onClose }) => {
+  if (!project) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-200">
+      <div
+        className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+      <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl shadow-red-900/20 animate-in zoom-in-95 duration-300 flex flex-col max-h-[90vh]">
+
+        {/* Modal Header Image */}
+        <div className="relative h-64 md:h-80 w-full shrink-0">
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent z-10"></div>
+          <img
+            src={project.image}
+            alt={project.name}
+            className="w-full h-full object-cover"
+          />
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-red-600 rounded-full text-white transition-colors backdrop-blur-md"
+          >
+            <X size={24} />
+          </button>
+
+          <div className="absolute bottom-0 left-0 p-8 z-20 w-full">
+            <span className="inline-block px-3 py-1 mb-3 text-xs font-bold tracking-wider text-red-400 uppercase bg-red-500/10 border border-red-500/20 rounded-full">
+              {project.tag}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">{project.name}</h2>
+          </div>
+        </div>
+
+        {/* Modal Content */}
+        <div className="p-8 overflow-y-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="md:col-span-2 space-y-6">
+              <div>
+                <h3 className="text-xl font-bold text-slate-200 mb-3 flex items-center gap-2">
+                  <BookOpen size={20} className="text-red-500" /> Deskripsi
+                </h3>
+                <p className="text-slate-400 leading-relaxed text-lg">
+                  {project.longDesc || project.desc}
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-slate-200 mb-3 flex items-center gap-2">
+                  <Cpu size={20} className="text-red-500" /> Teknologi
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies && project.technologies.map((tech, i) => (
+                    <span key={i} className="px-3 py-1.5 bg-slate-800 text-slate-300 rounded-lg text-sm font-medium border border-slate-700/50">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="p-5 bg-slate-800/30 rounded-2xl border border-slate-800">
+                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Link Proyek</h3>
+                <div className="flex flex-col gap-3">
+                  {project.links ? (
+                    project.links.map((link, i) => (
+                      <a
+                        key={i}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between px-4 py-3 bg-slate-800 hover:bg-red-600 text-white rounded-xl transition-all group"
+                      >
+                        <span className="font-medium">{link.label}</span>
+                        <ExternalLink size={18} className="text-slate-400 group-hover:text-white" />
+                      </a>
+                    ))
+                  ) : (
+                    <a
+                      href={project.link || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all shadow-lg hover:shadow-red-600/20"
+                    >
+                      <span className="font-bold">Buka Repository</span>
+                      <Github size={18} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -66,7 +170,9 @@ const App = () => {
         desc: "Pengembangan sistem simulasi transaksi cepat dengan manajemen konkurensi tinggi.",
         tag: "Performance",
         link: "https://github.com/Alieff19/DonPablo_FlashSale_Simulation",
-        image: donPabloImg
+        image: donPabloImg,
+        technologies: ["Python", "Concurrency", "Simulation", "Locust"],
+        longDesc: "Simulasi backend flash sale yang dirancang untuk menangani trafik tinggi dalam waktu singkat. Sistem ini mengimplementasikan konsep locking dan antrian untuk mencegah race condition saat ribuan permintaan masuk secara bersamaan."
       },
       {
         id: 2,
@@ -74,7 +180,9 @@ const App = () => {
         desc: "Sistem penyimpanan data terenkripsi yang diakses melalui otentikasi QR Code unik.",
         tag: "Security",
         link: "https://github.com/Alieff19/SecureQR_Vault",
-        image: secureQrImg
+        image: secureQrImg,
+        technologies: ["Python", "Cryptography", "QR Code", "Security"],
+        longDesc: "Aplikasi keamanan yang mengenkripsi file sensitif dan menghasilkan kunci akses berupa QR Code dinamis. Hanya pengguna dengan QR Code fisik yang valid yang dapat mendekripsi dan mengakses kembali file tersebut."
       },
       {
         id: 3,
@@ -85,21 +193,27 @@ const App = () => {
           { label: "Frontend", url: "https://github.com/amad-IO/frontendkasir-madura" },
           { label: "Backend", url: "https://github.com/azteca22che/BACKEND-FIKS" }
         ],
-        image: maduraStoreImg
+        image: maduraStoreImg,
+        technologies: ["React", "Express.js", "MySQL", "Tailwind CSS"],
+        longDesc: "Solusi e-commerce lengkap untuk membantu UMKM Madura menjangkau pasar digital. Dilengkapi fitur manajemen stok real-time, laporan penjualan otomatis, dan integrasi payment gateway sederhana."
       },
       {
         id: 4,
         name: "Pemira (E-Voting System)",
         desc: "Website pemungutan suara digital yang mengutamakan integritas dan transparansi data.",
         tag: "Web App",
-        image: pemiraImg
+        image: pemiraImg,
+        technologies: ["PHP", "MySQL", "Bootstrap", "Chart.js"],
+        longDesc: "Sistem E-Voting yang digunakan untuk pemilihan raya mahasiswa. Mengutamakan keamanan suara pemilih, anonimitas, dan hasil perhitungan real-time yang transparan untuk mencegah kecurangan."
       },
       {
         id: 5,
         name: "Moodmeal",
         desc: "Website cerdas rekomendasi menu kuliner berdasarkan analisis suasana hati pengguna.",
         tag: "Website",
-        image: moodmealImg
+        image: moodmealImg,
+        technologies: ["React", "AI Integration", "Tailwind CSS"],
+        longDesc: "Platform rekomendasi makanan berbasis suasana hati (mood). Pengguna cukup memilih perasaan mereka saat ini, dan algoritma cerdas akan menyarankan menu kuliner yang dapat meningkatkan atau menyeimbangkan mood tersebut."
       }
     ],
     experience: [
@@ -310,12 +424,19 @@ const App = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {data.projects.map((p, idx) => (
-              <div key={p.id} className={`group relative rounded-[32px] bg-slate-900 border border-slate-800 overflow-hidden hover:border-red-500/50 transition-all shadow-xl hover:shadow-red-600/5 ${idx === 0 ? 'md:col-span-2' : ''}`}>
+              <div
+                key={p.id}
+                className={`group relative rounded-[32px] bg-slate-900 border border-slate-800 overflow-hidden hover:border-red-500/50 transition-all shadow-xl hover:shadow-red-600/5 cursor-pointer ${idx === 0 ? 'md:col-span-2' : ''}`}
+                onClick={() => setSelectedProject(p)}
+              >
 
                 {/* Image Container */}
                 <div className="relative h-48 w-full overflow-hidden">
                   <div className="absolute inset-0 bg-red-600/10 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute top-4 right-4 z-20 bg-slate-950/50 backdrop-blur-md p-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                    <Maximize2 className="text-white w-5 h-5" />
+                  </div>
                 </div>
 
                 <div className="relative z-10 p-8">
@@ -327,27 +448,22 @@ const App = () => {
                     {p.tag}
                   </span>
                   <h3 className="text-2xl font-bold mb-3 group-hover:text-red-400 transition-colors leading-tight">{p.name}</h3>
-                  <p className="text-slate-400 mb-6 text-base leading-relaxed">{p.desc}</p>
+                  <p className="text-slate-400 mb-6 text-base leading-relaxed line-clamp-2">{p.desc}</p>
 
-                  {p.links ? (
-                    <div className="flex gap-4">
-                      {p.links.map((link, i) => (
-                        <a key={i} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-bold text-white hover:text-red-400 transition-all cursor-pointer bg-slate-800/50 hover:bg-slate-800 px-4 py-2 rounded-lg border border-slate-700/50">
-                          {link.label} <ExternalLink size={14} className="text-red-500" />
-                        </a>
-                      ))}
-                    </div>
-                  ) : (
-                    <a href={p.link || "#"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:gap-3 transition-all cursor-pointer bg-red-600 hover:bg-red-700 px-6 py-2.5 rounded-xl shadow-lg shadow-red-600/20">
-                      Lihat Detail <ExternalLink size={16} />
-                    </a>
-                  )}
+                  <div className="flex items-center gap-2 text-sm font-bold text-red-500 group-hover:gap-3 transition-all">
+                    Lihat Detail <ChevronRight size={16} />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      )}
 
       {/* Experience Section */}
       <section id="experience" className="py-24 px-6">
