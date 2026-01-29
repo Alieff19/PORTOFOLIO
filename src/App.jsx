@@ -49,6 +49,16 @@ const App = () => {
       hard: ["Network Administration", "Web Development", "Users/Mobile Development", "Cybersecurity", "Modern Tools (Docker, Git)"],
       soft: ["Leadership", "Public Relations", "Problem Solving", "Adaptability"]
     },
+    techStack: [
+      { name: "Java", image: "https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" },
+      { name: "Python", image: "https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" },
+      { name: "PHP", image: "https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" },
+      { name: "Supabase", image: "https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" },
+      { name: "MySQL", image: "https://img.shields.io/badge/MySQL-000000?style=for-the-badge&logo=mysql&logoColor=white" },
+      { name: "React", image: "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" },
+      { name: "Tailwind CSS", image: "https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" },
+      { name: "Flutter", image: "https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" }
+    ],
     projects: [
       {
         id: 1,
@@ -262,6 +272,24 @@ const App = () => {
                   </span>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* Tech Stack Badges */}
+          <div className="mt-16 animate-in slide-in-from-bottom duration-700 delay-300">
+            <h3 className="flex items-center justify-center gap-3 text-2xl font-bold text-slate-200 mb-8">
+              <Server className="text-red-500" /> Tech Stack
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              {data.techStack.map((tech) => (
+                <img
+                  key={tech.name}
+                  src={tech.image}
+                  alt={tech.name}
+                  className="h-10 hover:scale-110 transition-transform shadow-lg shadow-red-500/20 rounded cursor-default"
+                  title={tech.name}
+                />
+              ))}
             </div>
           </div>
         </div>
