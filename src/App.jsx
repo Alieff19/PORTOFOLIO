@@ -218,6 +218,13 @@ const App = () => {
     ],
     experience: [
       {
+        type: "Akademik",
+        role: "Asisten Praktikum Sistem Operasi",
+        company: "Telkom University Surabaya",
+        period: "Feb 2026 - Sekarang",
+        desc: "Membimbing kegiatan praktikum Sistem Operasi mahasiswa, meninjau tugas, dan memberikan evaluasi."
+      },
+      {
         type: "Pekerjaan",
         role: "Field Support",
         company: "ICON+ (PLN Group)",
