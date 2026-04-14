@@ -24,7 +24,7 @@ import {
 import profileImg from './assets/profile2.jpg';
 import pemiraImg from './assets/pemira.png';
 import donPabloImg from './assets/don_pablo.png';
-import secureQrImg from './assets/secure_qr.png';
+import secureQrImg from './assets/secure_qr_updated.png';
 import maduraStoreImg from './assets/madura_store.png';
 import moodmealImg from './assets/moodmeal.png';
 
